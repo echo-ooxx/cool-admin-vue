@@ -1,4 +1,4 @@
 {
-	"editor.cursorSmoothCaretAnimation": "on",
+	"editor.cursorSmoothCaretAnimation": "off",
 	"editor.formatOnSave": true,
 }

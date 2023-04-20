@@ -84,12 +84,21 @@ export const useMenuStore = defineStore("menu", function () {
 	function get() {
 		return new Promise(async (resolve, reject) => {
 			function next(res: { menus: Menu.List; perms?: any[] }) {
+				const groupPath = new Map();
 				const list = res.menus
 					?.filter((e) => e.type != 2)
 					.map((e) => {
+						if (e.type === 0) {
+							groupPath.set(e.id, e.path);
+						} else {
+							const parentPath = groupPath.get(e.parentId);
+							e.path = parentPath ? `${parentPath}${e.path}` : e.path;
+						}
 						return {
 							...e,
-							path: revisePath(e.router || String(e.id)),
+							// todo 修改路径
+							path: revisePath(e.path || String(e.id)),
+							// path: revisePath(e.router || String(e.id)),
 							isShow: e.isShow === undefined ? true : e.isShow,
 							meta: {
 								...e.meta,

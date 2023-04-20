@@ -1,11 +1,13 @@
 import path from "path";
-import { UserConfig } from "vite";
+import { ConfigEnv, UserConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import compression from "vite-plugin-compression";
 import { visualizer } from "rollup-plugin-visualizer";
 import { proxy } from "./src/cool/config/proxy";
 import { cool } from "./build/cool";
+
+import { viteMockServe, ViteMockOptions } from "vite-plugin-mock";
 
 function resolve(dir: string) {
 	return path.resolve(__dirname, ".", dir);
@@ -25,6 +27,11 @@ export default (): UserConfig => {
 				open: false,
 				gzipSize: true,
 				brotliSize: true
+			}),
+			viteMockServe({
+				mockPath: "mock",
+				supportTs: true,
+				watchFiles: true
 			})
 		],
 		css: {

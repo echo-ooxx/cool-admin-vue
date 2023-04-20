@@ -2,6 +2,8 @@ import { Config } from "../types";
 import dev from "./dev";
 import prod from "./prod";
 
+import sampleRoutes from "/@/router/modules/sample";
+
 // 是否开发模式
 export const isDev = import.meta.env.MODE === "development";
 
@@ -9,14 +11,14 @@ export const isDev = import.meta.env.MODE === "development";
 export const config: Config = {
 	// 项目信息
 	app: {
-		name: "COOL-ADMIN",
+		name: "谷合后台",
 
 		// 菜单
 		menu: {
 			// 是否分组显示
 			isGroup: false,
 			// 自定义菜单列表
-			list: []
+			list: [...sampleRoutes]
 		},
 
 		// 路由
@@ -44,8 +46,9 @@ export const config: Config = {
 	// 调试
 	test: {
 		token: "",
+		//
 		mock: false,
-		eps: true
+		eps: false
 	},
 
 	// 当前环境

@@ -37,7 +37,8 @@ export default (): UserConfig => {
 		css: {
 			preprocessorOptions: {
 				scss: {
-					charset: false
+					charset: false,
+					additionalData: '@import "/$/base/static/css/index.scss";'
 				}
 			}
 		},

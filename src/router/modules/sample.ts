@@ -1,4 +1,3 @@
-import { ref } from "vue";
 import { Config } from "/@/cool/types";
 
 type muenItems = Config["app"]["menu"]["list"];

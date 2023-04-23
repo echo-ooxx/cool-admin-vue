@@ -96,6 +96,7 @@ async function toLogin() {
 	try {
 		// 登录
 		await service.base.open.login(form).then((res) => {
+			console.log(res);
 			user.setToken(res);
 		});
 

@@ -1,8 +1,7 @@
 import { ModuleConfig, config } from "/@/cool";
 import VueECharts from "vue-echarts";
 import ElementPlus from "element-plus";
-import "element-plus/theme-chalk/src/index.scss";
-import "./static/css/index.scss";
+import "element-plus/dist/index.css";
 import { useStore } from "./store";
 
 export default (): ModuleConfig => {
@@ -10,13 +9,13 @@ export default (): ModuleConfig => {
 		order: 99,
 		components: Object.values(import.meta.glob("./components/**/*.{vue,tsx}")),
 		views: [
-			{
-				path: "/my/info",
-				meta: {
-					label: "个人中心"
-				},
-				component: () => import("./views/info.vue")
-			}
+			// {
+			// 	path: "/my/info",
+			// 	meta: {
+			// 		label: "个人中心"
+			// 	},
+			// 	component: () => import("./views/info.vue")
+			// }
 		],
 		pages: [
 			{

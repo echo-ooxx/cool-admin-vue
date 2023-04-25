@@ -8,7 +8,10 @@
 
 		<div class="app-layout__right">
 			<topbar />
-			<process />
+			<!-- industry新增 -->
+			<route-nav />
+			<!-- industry减去 -->
+			<!-- <process /> -->
 			<views />
 		</div>
 	</div>
@@ -17,8 +20,9 @@
 <script lang="ts" name="app-layout" setup>
 import Topbar from "./components/topbar.vue";
 import Slider from "./components/slider.vue";
-import process from "./components/process.vue";
+// import process from "./components/process.vue";
 import Views from "./components/views.vue";
+import RouteNav from "./components/route-nav.vue";
 import { useBase } from "/$/base";
 
 const { app } = useBase();

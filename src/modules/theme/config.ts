@@ -9,7 +9,7 @@ export default (): ModuleConfig => {
 
 		options: {
 			// 推荐主题：'jihei', 'guolv', 'jiangzi'
-			name: "default"
+			name: "industry"
 			// 自定义主题色
 			// color: "#4165d7",
 		},
@@ -24,7 +24,6 @@ export default (): ModuleConfig => {
 					},
 					options
 				);
-
 			setTheme(data);
 		}
 	};

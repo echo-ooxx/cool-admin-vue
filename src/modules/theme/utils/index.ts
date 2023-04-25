@@ -21,6 +21,11 @@ function mix(color1: string, color2: string, weight: number) {
 
 export const themes = [
 	{
+		label: "工业",
+		name: "industry",
+		color: "#CF1322"
+	},
+	{
 		label: "钴蓝",
 		name: "default",
 		color: "#4165d7"

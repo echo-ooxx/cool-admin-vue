@@ -34,7 +34,10 @@ export default defineComponent({
 							return (
 								<div class="wrap">
 									<cl-svg name={e.icon} />
-									<span v-show={!app.isFold || index != 1}>{e.name}</span>
+									<span v-show={!app.isFold || index != 1}>
+										{index != 1 ? "·" : ""}
+										{e.name}
+									</span>
 								</div>
 							);
 						};

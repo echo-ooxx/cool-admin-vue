@@ -2,7 +2,8 @@
 	<a-menu v-if="app.info.menu.isGroup" />
 
 	<div class="app-topbar">
-		<div
+		<!-- industry减去 -->
+		<!-- <div
 			class="app-topbar__collapse"
 			:class="{
 				unfold: !app.isFold
@@ -10,15 +11,20 @@
 			@click="app.fold()"
 		>
 			<i class="cl-iconfont cl-icon-fold"></i>
-		</div>
+		</div> -->
 
 		<!-- 路由导航 -->
-		<route-nav />
+		<!-- industry减去 -->
+		<!-- <route-nav /> -->
 
-		<div class="flex1"></div>
+		<div class="flex1">
+			<p class="title">工业网络设计系统 V1.0</p>
+			<p>All Rights Reserved.</p>
+		</div>
 
 		<!-- 工具栏 -->
-		<ul class="app-topbar__tools">
+		<!-- industry减去 -->
+		<!-- <ul class="app-topbar__tools">
 			<auto-menu-btn />
 
 			<li>
@@ -28,14 +34,16 @@
 			<li>
 				<cl-theme />
 			</li>
-		</ul>
+		</ul> -->
 
 		<!-- 用户信息 -->
 		<div class="app-topbar__user" v-if="user.info">
 			<el-dropdown trigger="click" hide-on-click @command="onCommand">
 				<span class="el-dropdown-link">
 					<span class="name">{{ user.info.nickName }}</span>
-					<cl-avatar :size="32" :src="user.info.headImg" />
+					<el-icon :size="12"><arrow-down-bold /></el-icon>
+					<!-- industry减去 -->
+					<!-- <cl-avatar :size="32" :src="user.info.headImg" /> -->
 				</span>
 
 				<template #dropdown>
@@ -52,18 +60,45 @@
 				</template>
 			</el-dropdown>
 		</div>
+		<!-- industry新增 快捷按钮 -->
+		<div class="app-topbar__quick-tools">
+			<div class="tool__item" v-for="(tool, index) in tempTools" :key="index">
+				<cl-svg class="icon" :name="tool.icon"></cl-svg>
+				<p>{{ tool.text }}</p>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script lang="ts" name="app-topbar" setup>
 import { useBase } from "/$/base";
 import { useCool } from "/@/cool";
-import RouteNav from "./route-nav.vue";
+import { ArrowDownBold } from "@element-plus/icons-vue";
 import AMenu from "./amenu.vue";
-import AutoMenuBtn from "/$/magic/components/auto-menu/btn.vue";
+// import RouteNav from "./route-nav.vue";
+// import AutoMenuBtn from "/$/magic/components/auto-menu/btn.vue";
 
 const { router, service } = useCool();
 const { user, app } = useBase();
+
+const tempTools = [
+	{
+		text: "审计报表",
+		icon: "icon-document"
+	},
+	{
+		text: "快速指南",
+		icon: "icon-collection"
+	},
+	{
+		text: "清缓存",
+		icon: "icon-broom"
+	},
+	{
+		text: "锁屏",
+		icon: "icon-lock"
+	}
+];
 
 async function onCommand(name: string) {
 	switch (name) {

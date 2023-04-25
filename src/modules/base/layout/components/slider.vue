@@ -4,9 +4,20 @@
 			<img src="/logo.png" />
 			<span v-if="!app.isFold || browser.isMini">{{ app.info.name }}</span>
 		</div>
-
 		<div class="app-slider__container">
 			<b-menu />
+		</div>
+		<!-- industry新增 -->
+		<div
+			class="app-slider__collapse"
+			:class="{
+				unfold: !app.isFold
+			}"
+			@click="app.fold()"
+		>
+			<div class="collapse__inner">
+				<i class="cl-iconfont cl-icon-fold"></i>
+			</div>
 		</div>
 	</div>
 </template>
@@ -14,6 +25,7 @@
 <script lang="ts" name="app-slider" setup>
 import { useBase } from "/$/base";
 import { useBrowser } from "/@/cool";
+
 import BMenu from "./bmenu";
 
 const { browser } = useBrowser();

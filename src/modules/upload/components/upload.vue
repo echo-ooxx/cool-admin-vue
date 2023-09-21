@@ -290,7 +290,8 @@ async function beforeUpload(file: any, item?: Upload.Item) {
 			progress: 0,
 			url: file.url,
 			uid: file.uid,
-			size: file.size
+			size: file.size,
+			originName: file.name
 		};
 
 		// 预览
@@ -379,7 +380,11 @@ async function httpRequest(req: any, item?: any) {
 		let fileName = fileId + "_" + req.file.name;
 
 		// 上传模式、类型
-		const { mode, type } = await service.base.comm.uploadMode();
+		// const { mode, type } = await service.base.comm.uploadMode();
+		const { mode, type } = {
+			mode: "",
+			type: "qiniu"
+		};
 
 		// 多种上传请求
 		return new Promise((resolve, reject) => {
@@ -413,7 +418,7 @@ async function httpRequest(req: any, item?: any) {
 						timeout: 600000,
 						data: fd,
 						onUploadProgress(e: { loaded: number; total: number }) {
-							item.progress = parseInt(String((e.loaded / e.total) * 100));
+							item.progress = parseInt(String((e.loaded / e.total) * 98));
 							emit("progress", item);
 						},
 						proxy: mode == "local" ? true : false
@@ -423,7 +428,8 @@ async function httpRequest(req: any, item?: any) {
 							item.url = res;
 							item.key = res.replace(/^https?:\/\/[^\/]+/, "");
 						} else {
-							item.url = `${preview || host}/${fileName}`;
+							// 目前仅有七牛
+							item.url = `${res.host}/${res.key}`;
 							item.key = fileName;
 						}
 
@@ -439,6 +445,10 @@ async function httpRequest(req: any, item?: any) {
 						item.error = err.message;
 						emit("error", item);
 						reject(err);
+					})
+					.finally(() => {
+						item.progress = 100;
+						emit("progress", item);
 					});
 			}
 
@@ -446,9 +456,13 @@ async function httpRequest(req: any, item?: any) {
 				next({
 					host: "/admin/base/comm/upload"
 				});
+			} else if (mode == "" && type == "qiniu") {
+				next({
+					host: "/dev/open/upload"
+				});
 			} else {
-				service.base.comm
-					.upload()
+				service.open.upload.token
+					.get()
 					.then((res) => {
 						switch (type) {
 							// 腾讯
@@ -472,8 +486,8 @@ async function httpRequest(req: any, item?: any) {
 							// 七牛
 							case "qiniu":
 								next({
-									host: res.uploadUrl,
-									preview: res.publicDomain,
+									host: res.host,
+									preview: res.preview,
 									data: {
 										token: res.token
 									}

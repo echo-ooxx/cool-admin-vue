@@ -142,3 +142,25 @@ body.theme {
 		}
 	}
 }
+
+.page-container {
+	background-color: #fff;
+	padding: 10px;
+	.el-header {
+		padding: 0;
+		height: auto;
+	}
+	.el-main {
+		padding: 0;
+		margin-top: 10px;
+	}
+	.el-footer {
+		padding: 0;
+	}
+}
+
+.el-button {
+	a {
+		color: inherit;
+	}
+}

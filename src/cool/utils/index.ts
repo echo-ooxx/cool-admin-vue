@@ -317,5 +317,21 @@ export function sleep(duration: number) {
 	});
 }
 
+// 获取指定父元素
+export function findParent(current: HTMLElement, parentTagName: string): HTMLElement {
+	const parent = current.parentElement;
+	if (parent) {
+		const { tagName } = parent;
+
+		if (tagName.toLowerCase() === parentTagName) {
+			return parent;
+		} else {
+			return findParent(parent, parentTagName);
+		}
+	} else {
+		return current;
+	}
+}
+
 export { storage };
 export * from "./loading";

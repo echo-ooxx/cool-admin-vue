@@ -43,6 +43,13 @@ module.exports = {
 				varsIgnorePattern: "^h$"
 			}
 		],
+		"@typescript-eslint/no-this-alias": [
+			"error",
+			{
+				allowDestructuring: false,
+				allowedNames: ["that", "self"]
+			}
+		],
 		"no-unused-vars": [
 			"error",
 			{

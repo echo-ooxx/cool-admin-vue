@@ -9,15 +9,38 @@
 		"resolveJsonModule": true,
 		"experimentalDecorators": true,
 		"esModuleInterop": true,
-		"suppressImplicitAnyIndexErrors": true,
-		"lib": ["esnext", "dom"],
-		"types": ["vite/client", "element-plus/global"],
+		"lib": [
+			"esnext",
+			"dom"
+		],
+		"types": [
+			"vite/client",
+			"element-plus/global",
+			"./types/global",
+			"@map-component/tmap-types"
+		],
 		"paths": {
-			"/$/*": ["./src/modules/*"],
-			"/@/*": ["./src/*"],
-			"/#/*": ["./types/*"]
+			"/$/*": [
+				"./src/modules/*"
+			],
+			"/@/*": [
+				"./src/*"
+			],
+			"/#/*": [
+				"./types/*"
+			]
 		}
 	},
-	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "env.d.ts"],
-	"exclude": ["node_modules", "dist"]
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.d.ts",
+		"src/**/*.tsx",
+		"src/**/*.vue",
+		"env.d.ts",
+		"types/global.d.ts"
+	],
+	"exclude": [
+		"node_modules",
+		"dist"
+	]
 }

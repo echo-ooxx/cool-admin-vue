@@ -13,11 +13,9 @@ export function cool(): Plugin {
 					res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" });
 					res.end(JSON.stringify(data));
 				}
-
 				if (req.url?.includes("__cool")) {
 					const body = await parseJson(req);
 					let next: any;
-
 					switch (req.url) {
 						// 快速创建菜单
 						case "/__cool_createMenu":
@@ -37,6 +35,7 @@ export function cool(): Plugin {
 								data
 							});
 						}).catch((err: Error) => {
+							console.log(err);
 							done({
 								code: 1001,
 								message: err.message

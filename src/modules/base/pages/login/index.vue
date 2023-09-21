@@ -5,7 +5,7 @@
 				<img src="/logo.png" alt="Logo" />
 				<span>{{ app.info.name }}</span>
 			</div>
-			<p class="desc">一款快速开发后台权限管理系统</p>
+			<p class="desc"></p>
 
 			<el-form label-position="top" class="form" :disabled="saving">
 				<el-form-item label="用户名">
@@ -30,7 +30,7 @@
 				<el-form-item label="验证码">
 					<div class="row">
 						<input
-							v-model="form.verifyCode"
+							v-model="form.captcha"
 							placeholder="图片验证码"
 							maxlength="4"
 							@keyup.enter="toLogin"
@@ -38,10 +38,10 @@
 
 						<captcha
 							:ref="setRefs('captcha')"
-							v-model="form.captchaId"
+							v-model="form.captchaID"
 							@change="
 								() => {
-									form.verifyCode = '';
+									form.captcha = '';
 								}
 							"
 						/>
@@ -73,8 +73,8 @@ const saving = ref(false);
 const form = reactive({
 	username: "",
 	password: "",
-	captchaId: "",
-	verifyCode: ""
+	captchaID: "",
+	captcha: ""
 });
 
 // 登录
@@ -87,7 +87,7 @@ async function toLogin() {
 		return ElMessage.error("密码不能为空");
 	}
 
-	if (!form.verifyCode) {
+	if (!form.captcha) {
 		return ElMessage.error("图片验证码不能为空");
 	}
 
@@ -95,8 +95,9 @@ async function toLogin() {
 
 	try {
 		// 登录
-		await service.base.open.login(form).then((res) => {
-			user.setToken(res);
+		await service.backend.login.post(form).then((res) => {
+			const { token } = res;
+			user.setToken(token);
 		});
 
 		// token 事件

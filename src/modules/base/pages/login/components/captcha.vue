@@ -20,24 +20,20 @@ const base64 = ref("");
 // svg
 const svg = ref("");
 
-function refresh() {
-	service.base.open
-		.captcha({
-			height: 40,
-			width: 150
-		})
-		.then(({ captchaId, data }) => {
+async function refresh() {
+	const pre = service.backend.login.captcha.get();
+	pre()
+		.then(({ captchaID, data }) => {
 			if (data.includes(";base64,")) {
 				base64.value = data;
 			} else {
 				svg.value = data;
 			}
-
-			emit("update:modelValue", captchaId);
+			emit("update:modelValue", captchaID);
 			emit("change", {
 				base64,
 				svg,
-				captchaId
+				captchaID
 			});
 		})
 		.catch((err) => {

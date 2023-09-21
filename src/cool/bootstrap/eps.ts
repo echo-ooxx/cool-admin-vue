@@ -14,6 +14,28 @@ function getNames(v: any) {
 // 标签名
 const names = getNames(new BaseService());
 
+// swagger 地址列表
+type SwaggerReturn = {
+	openapi: string;
+	paths: Record<string, any>;
+	info: Record<string, any>;
+	tags: {
+		name?: string;
+		description?: string;
+	}[];
+	servers: string[];
+	components: Record<string, any>;
+};
+// baseservice api
+type ApiItem = {
+	name: string;
+	api: {
+		method: string;
+		path: string;
+	}[];
+	prefix: string;
+};
+
 // 创建
 export async function createEps() {
 	// 创建描述文件
@@ -136,9 +158,7 @@ export async function createEps() {
 								// 创建权限
 								if (!d[k].permission) {
 									d[k].permission = {};
-
 									const ks = Array.from(new Set([...names, ...getNames(d[k])]));
-
 									ks.forEach((e) => {
 										d[k].permission[e] = `${d[k].namespace.replace(
 											"admin/",
@@ -146,12 +166,10 @@ export async function createEps() {
 										)}/${e}`.replace(/\//g, ":");
 									});
 								}
-
 								list.push(e);
 							}
 						}
 					}
-
 					deep(service, 0);
 				});
 			}
@@ -184,11 +202,12 @@ export async function createEps() {
 			if (isDev && config.test.eps) {
 				await service
 					.request({
-						url: "/admin/base/open/eps"
+						// url: "/admin/base/open/eps"
+						url: "/swagger-json"
 					})
-					.then((res) => {
+					.then((res: SwaggerReturn) => {
 						if (!isEmpty(res) && isObject(res)) {
-							list = res;
+							list = formatApis(res);
 						}
 					});
 			}
@@ -199,6 +218,37 @@ export async function createEps() {
 		} catch (err) {
 			console.error("[Eps] 获取失败！", err);
 		}
+	}
+
+	// 格式化swagger接口列表
+	function formatApis(data: SwaggerReturn): ApiItem[] {
+		const { paths } = data;
+		const reg = /\/{[^}]+}/g;
+		const group = Object.keys(paths);
+
+		const _format = group.map((item) => {
+			const _prefix = item.replaceAll(reg, "");
+			const prefix = _prefix;
+			const path = "";
+			// const lastIndex = _prefix.lastIndexOf("/");
+			// if (lastIndex > 0) {
+			// 	prefix = _prefix.substring(0, lastIndex);
+			// 	path = _prefix.substring(lastIndex);
+			// }
+			const api = Object.keys(paths[item]).map((method: string) => {
+				return {
+					method,
+					path
+				};
+			});
+			return {
+				name: "",
+				prefix,
+				api: []
+			};
+		});
+
+		return _format;
 	}
 
 	await getEps();

@@ -27,6 +27,7 @@ export declare interface Config {
 					process?: boolean;
 					// 是否缓存
 					keepAlive?: boolean;
+					[key: string]: any;
 				};
 				// 子集
 				children?: Config["app"]["menu"]["list"];

@@ -82,7 +82,7 @@ export default defineComponent({
 			return (
 				<div class="app-slider__menu">
 					<el-menu
-						default-active={route.path}
+						default-active={route?.meta?.parentActivePath ?? route.path}
 						background-color="transparent"
 						collapse-transition={true}
 						collapse={browser.isMini ? false : app.isFold}

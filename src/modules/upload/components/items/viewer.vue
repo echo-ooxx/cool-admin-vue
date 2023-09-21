@@ -39,7 +39,7 @@ function open(item: Eps.SpaceInfoEntity, list: Eps.SpaceInfoEntity[]) {
 		}
 	}
 
-	window.open(item.url);
+	window.open(item.url ?? item);
 }
 
 function close() {

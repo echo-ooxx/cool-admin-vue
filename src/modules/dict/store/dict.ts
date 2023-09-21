@@ -15,6 +15,7 @@ const useDictStore = defineStore("dict", () => {
 
 	// 刷新
 	async function refresh(types?: string[]) {
+		return {};
 		return service.dict.info
 			.data({
 				types

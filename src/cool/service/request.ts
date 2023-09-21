@@ -1,4 +1,4 @@
-import axios, { AxiosInterceptorOptions } from "axios";
+import axios from "axios";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { ElMessage } from "element-plus";
@@ -6,6 +6,16 @@ import { isDev, config } from "/@/cool";
 import { storage } from "/@/cool/utils";
 import { useBase } from "/$/base";
 import { router } from "../router";
+import { h } from "vue";
+
+const enum statusCode {
+	OK = 200,
+	UNAUTHORIZE = 401,
+	FORBIDDEN = 403,
+	NOTFOUND = 404,
+	INTERNALSERVERERROR = 500,
+	BADGATWAY = 502
+}
 
 const request = axios.create({
 	timeout: 30000,
@@ -46,7 +56,7 @@ request.interceptors.request.use(
 		if (user.token) {
 			// 请求标识
 			if (req.headers) {
-				req.headers["Authorization"] = user.token;
+				req.headers["Authorization"] = `Bearer ${user.token}`;
 			}
 
 			if (req.url?.includes("refreshToken")) {
@@ -112,6 +122,7 @@ request.interceptors.response.use(
 		}
 
 		switch (code) {
+			case statusCode.OK:
 			case 1000:
 				return data;
 			default:
@@ -121,11 +132,14 @@ request.interceptors.response.use(
 	async (error) => {
 		NProgress.done();
 
+		let message = error.message;
 		if (error.response) {
-			const { status, config: c } = error.response;
+			const { status, config: c, data } = error.response;
 			const { user } = useBase();
 
-			if (status == 401) {
+			message = data.message;
+
+			if (status == statusCode.UNAUTHORIZE) {
 				user.logout();
 			} else {
 				if (isDev) {
@@ -134,23 +148,38 @@ request.interceptors.response.use(
 					}
 				} else {
 					switch (status) {
-						case 403:
+						case statusCode.FORBIDDEN:
 							router.push("/403");
 							break;
 
-						case 500:
+						case statusCode.INTERNALSERVERERROR:
 							router.push("/500");
 							break;
 
-						case 502:
+						case statusCode.BADGATWAY:
 							router.push("/502");
 							break;
 					}
 				}
 			}
 		}
+		let msg = message;
+		if (Array.isArray(message)) {
+			const text = message.map((t) => h("p", null, t));
+			msg = h(
+				"div",
+				{
+					style: "font-size:12px;color:#999"
+				},
+				text
+			);
+		}
 
-		return Promise.reject({ message: error.message });
+		ElMessage.error(msg);
+
+		return Promise.reject({
+			message: msg
+		});
 	}
 );
 

@@ -74,6 +74,16 @@ export class BaseService {
 			if (options.proxy === undefined || options.proxy) {
 				options.url = ns + options.url;
 			}
+
+			// 处理 params
+			// if (
+			// 	options.method?.toLowerCase() === "get" &&
+			// 	options.data &&
+			// 	Object.keys(options.data).length > 0
+			// ) {
+			// 	const suffix = Object.values(options.data).map((param) => `/${param}`);
+			// 	options.url = `${options.url}${suffix.join("")}`;
+			// }
 		}
 
 		return request(options);
@@ -110,19 +120,62 @@ export class BaseService {
 		});
 	}
 
-	delete(data: any) {
-		return this.request({
-			url: "/delete",
-			method: "POST",
-			data
-		});
-	}
+	// delete(data: any) {
+	// 	return this.request({
+	// 		url: "/delete",
+	// 		method: "POST",
+	// 		data
+	// 	});
+	// }
 
 	add(data: any) {
 		return this.request({
 			url: "/add",
 			method: "POST",
 			data
+		});
+	}
+
+	/**
+	 *
+	 * @param id params
+	 * @returns
+	 * 实现部分
+	 * 定义部分修改在 `biuld/cool/lib/eps/index.ts :185`
+	 */
+	get(id?: number | string) {
+		const url = id ? `/${id}` : "";
+		const that = this;
+		return function (params?: string) {
+			return that.request({
+				method: "GET",
+				url,
+				params
+			});
+		};
+	}
+
+	post(data: any, params?: any) {
+		return this.request({
+			url: "",
+			method: "POST",
+			data,
+			params
+		});
+	}
+
+	patch({ id, data }: { id: string | number; data: any }) {
+		return this.request({
+			url: `/${id}`,
+			method: "PATCH",
+			data
+		});
+	}
+
+	delete(id: number) {
+		return this.request({
+			url: `/${id}`,
+			method: "DELETE"
 		});
 	}
 }

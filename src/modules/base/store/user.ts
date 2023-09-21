@@ -13,16 +13,16 @@ export const useUserStore = defineStore("user", function () {
 	// 设置标识
 	function setToken(data: {
 		token: string;
-		expire: number;
-		refreshToken: string;
-		refreshExpire: number;
+		expire?: number;
+		refreshToken?: string;
+		refreshExpire?: number;
 	}) {
 		// 请求的唯一标识
 		token.value = data.token;
 		storage.set("token", data.token, data.expire);
 
 		// 刷新 token 的唯一标识
-		storage.set("refreshToken", data.refreshToken, data.refreshExpire);
+		// storage.set("refreshToken", data.refreshToken, data.refreshExpire);
 	}
 
 	// 刷新标识
@@ -69,10 +69,9 @@ export const useUserStore = defineStore("user", function () {
 
 	// 获取用户信息
 	async function get() {
-		return service.base.comm.person().then((res) => {
-			set(res);
-			return res;
-		});
+		const res = await service.backend.sysUser.get()();
+		set(res);
+		return res;
 	}
 
 	return {

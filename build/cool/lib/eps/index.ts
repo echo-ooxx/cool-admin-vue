@@ -181,6 +181,10 @@ function createService({ list, service }: Options) {
 										res = en;
 										break;
 
+									case "/get":
+										res = "(params?: any) => Promise<any>";
+										break;
+
 									default:
 										res = "any";
 										break;
@@ -192,10 +196,12 @@ function createService({ list, service }: Options) {
 								t.push(` * ${a.summary || n}\n`);
 								t.push(" */\n");
 
+								const fullRes = a.path === "/get" ? res : `Promise<${res}>`;
+
 								t.push(
 									`${n}(data${q.length == 1 ? "?" : ""}: ${q.join(
 										""
-									)}): Promise<${res}>;`
+									)}): ${fullRes};`
 								);
 							}
 

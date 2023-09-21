@@ -18,7 +18,7 @@
 		<div class="flex1"></div>
 
 		<!-- 工具栏 -->
-		<ul class="app-topbar__tools">
+		<ul class="app-topbar__tools" style="display: none">
 			<auto-menu-btn />
 
 			<li>
@@ -71,7 +71,7 @@ async function onCommand(name: string) {
 			router.push("/my/info");
 			break;
 		case "exit":
-			await service.base.comm.logout();
+			// await service.base.comm.logout();
 			user.logout();
 			break;
 	}

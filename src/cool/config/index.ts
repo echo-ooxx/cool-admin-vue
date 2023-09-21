@@ -2,7 +2,7 @@ import { Config } from "../types";
 import dev from "./dev";
 import prod from "./prod";
 
-import sampleRoutes from "/@/router/modules/sample";
+import * as routes from "/@/router";
 
 // 是否开发模式
 export const isDev = import.meta.env.MODE === "development";
@@ -18,7 +18,7 @@ export const config: Config = {
 			// 是否分组显示
 			isGroup: false,
 			// 自定义菜单列表
-			list: [...sampleRoutes]
+			list: [...routes.project!, ...routes.sample, ...routes.user]
 		},
 
 		// 路由
@@ -48,7 +48,7 @@ export const config: Config = {
 		token: "",
 		//
 		mock: false,
-		eps: false
+		eps: true
 	},
 
 	// 当前环境

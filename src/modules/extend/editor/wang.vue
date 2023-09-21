@@ -1,12 +1,12 @@
 <template>
 	<div class="cl-editor-wang" :class="{ disabled }">
 		<!-- 工具栏 -->
-		<toolbar :editor="Editor" :mode="mode" />
+		<toolbar :editor="Editor" :mode="mode" :default-config="toolbarConfig" />
 
 		<!-- 编辑框 -->
 		<editor
 			v-model="value"
-			:defaultConfig="editorConfig"
+			:default-config="editorConfig"
 			:mode="mode"
 			:style="style"
 			@onCreated="onCreated"
@@ -16,12 +16,18 @@
 		/>
 
 		<!-- 图片 -->
-		<cl-upload-space
+		<!-- <cl-upload-space
 			:ref="setRefs('image')"
 			accept="image/*"
 			:show-btn="false"
 			@confirm="onFileConfirm"
-		/>
+		/> -->
+		<editor-uploader
+			:ref="setRefs('image')"
+			:show-btn="false"
+			accept="image/*"
+			@confirm="onFileConfirm"
+		></editor-uploader>
 
 		<!-- 视频 -->
 		<cl-upload-space
@@ -35,9 +41,19 @@
 
 <script lang="ts">
 import "@wangeditor/editor/dist/css/style.css";
-import { onBeforeUnmount, ref, shallowRef, watch, PropType, computed, defineComponent } from "vue";
+import {
+	onBeforeUnmount,
+	ref,
+	shallowRef,
+	watch,
+	PropType,
+	computed,
+	defineComponent,
+	onMounted,
+	onUpdated
+} from "vue";
 import { Editor, Toolbar } from "@wangeditor/editor-for-vue";
-import { IEditorConfig } from "@wangeditor/editor";
+import { IEditorConfig, DomEditor, IToolbarConfig } from "@wangeditor/editor";
 import { useCool } from "/@/cool";
 import { parsePx } from "/@/cool/utils";
 
@@ -113,6 +129,16 @@ export default defineComponent({
 			}
 		};
 
+		// 工具栏配置
+		const toolbarConfig: Partial<IToolbarConfig> = {
+			excludeKeys: ["insertVideo", "codeBlock", "todo"]
+		};
+
+		// onUpdated(() => {
+		// 	const t = DomEditor.getToolbar(Editor.value);
+		// 	console.log(t?.getConfig());
+		// });
+
 		function onCreated(editor: any) {
 			Editor.value = editor;
 			onDisabled();
@@ -141,9 +167,9 @@ export default defineComponent({
 
 		function onFileConfirm(files: any[]) {
 			if (files.length > 0) {
-				files.forEach((file) => {
+				files.forEach((url) => {
 					if (temp.insertFn) {
-						temp.insertFn(file.url);
+						temp.insertFn(url);
 					}
 				});
 			}
@@ -168,7 +194,8 @@ export default defineComponent({
 			onBlur,
 			onChange,
 			editorConfig,
-			onFileConfirm
+			onFileConfirm,
+			toolbarConfig
 		};
 	}
 });

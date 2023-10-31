@@ -160,10 +160,10 @@ export async function createEps() {
 									d[k].permission = {};
 									const ks = Array.from(new Set([...names, ...getNames(d[k])]));
 									ks.forEach((e) => {
-										d[k].permission[e] = `${d[k].namespace.replace(
-											"admin/",
-											""
-										)}/${e}`.replace(/\//g, ":");
+										// d[k].permission[e] = `${d[k].namespace.replace(
+										// 	"admin/",
+										// 	""
+										// )}/${e}`.replace(/\//g, ":");
 									});
 								}
 								list.push(e);

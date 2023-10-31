@@ -45,6 +45,17 @@ declare namespace Api {
 		[K: string]: any;
 	}
 
+	interface news {
+		id: number;
+		title: {
+			cn: string;
+			en: string;
+		};
+		cover: string;
+		type: number;
+		[K: string]: any;
+	}
+
 	interface user {
 		id: number;
 		avatar_url: string;

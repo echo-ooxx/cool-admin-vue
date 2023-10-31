@@ -24,7 +24,7 @@
 					<el-switch
 						v-model="form.status"
 						:active-value="Status.normal"
-						:inactive-value="Status.delete"
+						:inactive-value="Status.block"
 						active-text="启用"
 						inactive-text="停用"
 					/>
@@ -119,17 +119,21 @@ const onFormSubmit = async () => {
 			loading.value = true;
 			const _postData = toRaw(form);
 			_postData.uid = checkedUID.value.length > 0 ? checkedUID.value["0"] : 0;
-			const res =
-				id.value > 0
-					? await _service.patch({ id: id.value, data: _postData })
-					: await _service.post(form);
-			loading.value = false;
-			if (id.value === 0) {
-				goBack();
-			} else {
-				Object.assign(_postData, res);
+			try {
+				const res =
+					id.value > 0
+						? await _service.patch({ id: id.value, data: _postData })
+						: await _service.post(form);
+				if (id.value === 0) {
+					goBack();
+				} else {
+					Object.assign(_postData, res);
+				}
+				ElMessage.success("操作成功");
+			} catch (e) {
+				console.log(e);
 			}
-			ElMessage.success("操作成功");
+			loading.value = false;
 		}
 	});
 };

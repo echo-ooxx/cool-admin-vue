@@ -1,9 +1,10 @@
 <template>
 	<el-container class="page-container">
 		<el-header>
-			<el-button type="success"
-				><router-link to="/project/detail">新增</router-link></el-button
-			>
+			<el-button type="success">
+				<router-link to="/project/detail">新增</router-link>
+			</el-button>
+			<el-button type="primary" @click="flushGeometry">更新经纬度</el-button>
 		</el-header>
 		<el-main>
 			<ex-table btn :header="header" :data="data" :btn-width="400" is-index>
@@ -36,8 +37,22 @@
 	</el-container>
 </template>
 <script lang="ts" setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { service } from "/@/cool";
+// import { ElLoading } from "element-plus";
+
+const getData = async () => {
+	const { list } = await service.backend.project.get()();
+	data.value = list;
+};
+
+const flushGeometry = async () => {
+	// const loading = ElLoading.service({
+	// 	lock: true
+	// });
+
+	const res = await service.backend.project.flush.get()();
+};
 
 const header: Table.IHeader[] = [
 	{
@@ -59,12 +74,9 @@ const header: Table.IHeader[] = [
 
 const data = ref<Api.projects[]>([]);
 
-const getData = async () => {
-	const { list } = await service.backend.project.get()();
-	data.value = list;
-};
-
-getData();
+onMounted(() => {
+	getData();
+});
 </script>
 <style lang="scss" scoped>
 .btinner {

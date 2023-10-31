@@ -456,6 +456,14 @@ declare namespace Eps {
 		 */
 		manager(data?: any): Promise<any>;
 		/**
+		 * managers
+		 */
+		managers(data?: any): Promise<any>;
+		/**
+		 * collections
+		 */
+		collections(data?: any): Promise<any>;
+		/**
 		 * 权限标识
 		 */
 		permission: {
@@ -469,6 +477,8 @@ declare namespace Eps {
 			patch: string;
 			delete: string;
 			manager: string;
+			managers: string;
+			collections: string;
 		};
 		/**
 		 * 权限状态
@@ -484,6 +494,8 @@ declare namespace Eps {
 			patch: boolean;
 			delete: boolean;
 			manager: boolean;
+			managers: boolean;
+			collections: boolean;
 		};
 		/**
 		 * 请求
@@ -608,6 +620,14 @@ declare namespace Eps {
 		 */
 		delete(data?: any): Promise<any>;
 		/**
+		 * flush
+		 */
+		flush(data?: any): Promise<any>;
+		/**
+		 * params
+		 */
+		params(data?: any): Promise<any>;
+		/**
 		 * types
 		 */
 		types(data?: any): Promise<any>;
@@ -628,6 +648,8 @@ declare namespace Eps {
 			post: string;
 			patch: string;
 			delete: string;
+			flush: string;
+			params: string;
 			types: string;
 			recommend: string;
 		};
@@ -644,6 +666,8 @@ declare namespace Eps {
 			post: boolean;
 			patch: boolean;
 			delete: boolean;
+			flush: boolean;
+			params: boolean;
 			types: boolean;
 			recommend: boolean;
 		};
@@ -1103,6 +1127,81 @@ declare namespace Eps {
 		request: Service["request"];
 	}
 
+	interface BackendNews {
+		/**
+		 * list
+		 */
+		list(data?: any): Promise<any[]>;
+		/**
+		 * page
+		 */
+		page(data?: any): Promise<{
+			pagination: { size: number; page: number; total: number };
+			list: any[];
+			[key: string]: any;
+		}>;
+		/**
+		 * info
+		 */
+		info(data?: any): Promise<any>;
+		/**
+		 * update
+		 */
+		update(data?: any): Promise<any>;
+		/**
+		 * add
+		 */
+		add(data?: any): Promise<any>;
+		/**
+		 * get
+		 */
+		get(data?: any): (params?: any) => Promise<any>;
+		/**
+		 * post
+		 */
+		post(data?: any): Promise<any>;
+		/**
+		 * patch
+		 */
+		patch(data?: any): Promise<any>;
+		/**
+		 * delete
+		 */
+		delete(data?: any): Promise<any>;
+		/**
+		 * 权限标识
+		 */
+		permission: {
+			list: string;
+			page: string;
+			info: string;
+			update: string;
+			add: string;
+			get: string;
+			post: string;
+			patch: string;
+			delete: string;
+		};
+		/**
+		 * 权限状态
+		 */
+		_permission: {
+			list: boolean;
+			page: boolean;
+			info: boolean;
+			update: boolean;
+			add: boolean;
+			get: boolean;
+			post: boolean;
+			patch: boolean;
+			delete: boolean;
+		};
+		/**
+		 * 请求
+		 */
+		request: Service["request"];
+	}
+
 	interface Login {
 		/**
 		 * list
@@ -1325,6 +1424,14 @@ declare namespace Eps {
 		 */
 		delete(data?: any): Promise<any>;
 		/**
+		 * flush
+		 */
+		flush(data?: any): Promise<any>;
+		/**
+		 * params
+		 */
+		params(data?: any): Promise<any>;
+		/**
 		 * types
 		 */
 		types(data?: any): Promise<any>;
@@ -1345,6 +1452,8 @@ declare namespace Eps {
 			post: string;
 			patch: string;
 			delete: string;
+			flush: string;
+			params: string;
 			types: string;
 			recommend: string;
 		};
@@ -1361,6 +1470,8 @@ declare namespace Eps {
 			post: boolean;
 			patch: boolean;
 			delete: boolean;
+			flush: boolean;
+			params: boolean;
 			types: boolean;
 			recommend: boolean;
 		};
@@ -1371,6 +1482,306 @@ declare namespace Eps {
 	}
 
 	interface AppManagers {
+		/**
+		 * list
+		 */
+		list(data?: any): Promise<any[]>;
+		/**
+		 * page
+		 */
+		page(data?: any): Promise<{
+			pagination: { size: number; page: number; total: number };
+			list: any[];
+			[key: string]: any;
+		}>;
+		/**
+		 * info
+		 */
+		info(data?: any): Promise<any>;
+		/**
+		 * update
+		 */
+		update(data?: any): Promise<any>;
+		/**
+		 * add
+		 */
+		add(data?: any): Promise<any>;
+		/**
+		 * get
+		 */
+		get(data?: any): (params?: any) => Promise<any>;
+		/**
+		 * post
+		 */
+		post(data?: any): Promise<any>;
+		/**
+		 * patch
+		 */
+		patch(data?: any): Promise<any>;
+		/**
+		 * delete
+		 */
+		delete(data?: any): Promise<any>;
+		/**
+		 * 权限标识
+		 */
+		permission: {
+			list: string;
+			page: string;
+			info: string;
+			update: string;
+			add: string;
+			get: string;
+			post: string;
+			patch: string;
+			delete: string;
+		};
+		/**
+		 * 权限状态
+		 */
+		_permission: {
+			list: boolean;
+			page: boolean;
+			info: boolean;
+			update: boolean;
+			add: boolean;
+			get: boolean;
+			post: boolean;
+			patch: boolean;
+			delete: boolean;
+		};
+		/**
+		 * 请求
+		 */
+		request: Service["request"];
+	}
+
+	interface AppManager {
+		/**
+		 * list
+		 */
+		list(data?: any): Promise<any[]>;
+		/**
+		 * page
+		 */
+		page(data?: any): Promise<{
+			pagination: { size: number; page: number; total: number };
+			list: any[];
+			[key: string]: any;
+		}>;
+		/**
+		 * info
+		 */
+		info(data?: any): Promise<any>;
+		/**
+		 * update
+		 */
+		update(data?: any): Promise<any>;
+		/**
+		 * add
+		 */
+		add(data?: any): Promise<any>;
+		/**
+		 * get
+		 */
+		get(data?: any): (params?: any) => Promise<any>;
+		/**
+		 * post
+		 */
+		post(data?: any): Promise<any>;
+		/**
+		 * patch
+		 */
+		patch(data?: any): Promise<any>;
+		/**
+		 * delete
+		 */
+		delete(data?: any): Promise<any>;
+		/**
+		 * 权限标识
+		 */
+		permission: {
+			list: string;
+			page: string;
+			info: string;
+			update: string;
+			add: string;
+			get: string;
+			post: string;
+			patch: string;
+			delete: string;
+		};
+		/**
+		 * 权限状态
+		 */
+		_permission: {
+			list: boolean;
+			page: boolean;
+			info: boolean;
+			update: boolean;
+			add: boolean;
+			get: boolean;
+			post: boolean;
+			patch: boolean;
+			delete: boolean;
+		};
+		/**
+		 * 请求
+		 */
+		request: Service["request"];
+	}
+
+	interface AppViewManager {
+		/**
+		 * list
+		 */
+		list(data?: any): Promise<any[]>;
+		/**
+		 * page
+		 */
+		page(data?: any): Promise<{
+			pagination: { size: number; page: number; total: number };
+			list: any[];
+			[key: string]: any;
+		}>;
+		/**
+		 * info
+		 */
+		info(data?: any): Promise<any>;
+		/**
+		 * update
+		 */
+		update(data?: any): Promise<any>;
+		/**
+		 * add
+		 */
+		add(data?: any): Promise<any>;
+		/**
+		 * get
+		 */
+		get(data?: any): (params?: any) => Promise<any>;
+		/**
+		 * post
+		 */
+		post(data?: any): Promise<any>;
+		/**
+		 * patch
+		 */
+		patch(data?: any): Promise<any>;
+		/**
+		 * delete
+		 */
+		delete(data?: any): Promise<any>;
+		/**
+		 * 权限标识
+		 */
+		permission: {
+			list: string;
+			page: string;
+			info: string;
+			update: string;
+			add: string;
+			get: string;
+			post: string;
+			patch: string;
+			delete: string;
+		};
+		/**
+		 * 权限状态
+		 */
+		_permission: {
+			list: boolean;
+			page: boolean;
+			info: boolean;
+			update: boolean;
+			add: boolean;
+			get: boolean;
+			post: boolean;
+			patch: boolean;
+			delete: boolean;
+		};
+		/**
+		 * 请求
+		 */
+		request: Service["request"];
+	}
+
+	interface AppNews {
+		/**
+		 * list
+		 */
+		list(data?: any): Promise<any[]>;
+		/**
+		 * page
+		 */
+		page(data?: any): Promise<{
+			pagination: { size: number; page: number; total: number };
+			list: any[];
+			[key: string]: any;
+		}>;
+		/**
+		 * info
+		 */
+		info(data?: any): Promise<any>;
+		/**
+		 * update
+		 */
+		update(data?: any): Promise<any>;
+		/**
+		 * add
+		 */
+		add(data?: any): Promise<any>;
+		/**
+		 * get
+		 */
+		get(data?: any): (params?: any) => Promise<any>;
+		/**
+		 * post
+		 */
+		post(data?: any): Promise<any>;
+		/**
+		 * patch
+		 */
+		patch(data?: any): Promise<any>;
+		/**
+		 * delete
+		 */
+		delete(data?: any): Promise<any>;
+		/**
+		 * 权限标识
+		 */
+		permission: {
+			list: string;
+			page: string;
+			info: string;
+			update: string;
+			add: string;
+			get: string;
+			post: string;
+			patch: string;
+			delete: string;
+		};
+		/**
+		 * 权限状态
+		 */
+		_permission: {
+			list: boolean;
+			page: boolean;
+			info: boolean;
+			update: boolean;
+			add: boolean;
+			get: boolean;
+			post: boolean;
+			patch: boolean;
+			delete: boolean;
+		};
+		/**
+		 * 请求
+		 */
+		request: Service["request"];
+	}
+
+	interface AppLogtest {
 		/**
 		 * list
 		 */
@@ -1491,6 +1902,14 @@ declare namespace Eps {
 		 */
 		manager(data?: any): Promise<any>;
 		/**
+		 * managers
+		 */
+		managers(data?: any): Promise<any>;
+		/**
+		 * collections
+		 */
+		collections(data?: any): Promise<any>;
+		/**
 		 * 权限标识
 		 */
 		permission: {
@@ -1504,6 +1923,8 @@ declare namespace Eps {
 			patch: string;
 			delete: string;
 			manager: string;
+			managers: string;
+			collections: string;
 		};
 		/**
 		 * 权限状态
@@ -1519,6 +1940,8 @@ declare namespace Eps {
 			patch: boolean;
 			delete: boolean;
 			manager: boolean;
+			managers: boolean;
+			collections: boolean;
 		};
 		/**
 		 * 请求
@@ -1551,11 +1974,18 @@ declare namespace Eps {
 				list: BackendMapList;
 			};
 			manager: BackendManager;
+			news: BackendNews;
 		};
 		login: Login;
 		collects: Collects;
 		project: Project;
-		app: { managers: AppManagers };
+		app: {
+			managers: AppManagers;
+			manager: AppManager;
+			view: { manager: AppViewManager };
+			news: AppNews;
+			logtest: AppLogtest;
+		};
 		user: User;
 	};
 }

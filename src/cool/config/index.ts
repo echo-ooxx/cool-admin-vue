@@ -18,7 +18,7 @@ export const config: Config = {
 			// 是否分组显示
 			isGroup: false,
 			// 自定义菜单列表
-			list: [...routes.project!, ...routes.sample, ...routes.user]
+			list: [...routes.project!, ...routes.user!, ...routes.news!, ...routes.sample!]
 		},
 
 		// 路由

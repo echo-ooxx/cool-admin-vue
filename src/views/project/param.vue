@@ -12,8 +12,19 @@
 					</div>
 					<div class="impor__container">
 						<p>支持模版批量导入参数</p>
-						<el-button :loading="loading">下载模版</el-button>
-						<el-button :loading="loading">一键导入</el-button>
+						<el-button :loading="loading"
+							><a href="/asserts/demo.csv" download="模版">下载模版</a></el-button
+						>
+						<el-upload
+							:show-file-list="false"
+							accept=".csv"
+							:http-request="onImport"
+							style="margin-left: 12px"
+						>
+							<template #trigger>
+								<el-button type="primary">一键导入</el-button>
+							</template>
+						</el-upload>
 					</div>
 				</el-row>
 				<div class="forms__container" v-if="params.length > 0">
@@ -79,10 +90,36 @@ import { whenErrorBack } from "/@/common/utlis";
 import { service } from "/@/cool";
 import { useRoute, useRouter } from "vue-router";
 import draggable from "vuedraggable";
-import { ElMessage } from "element-plus";
+import { ElMessage, UploadRequestOptions, ElLoading } from "element-plus";
 
 const route = useRoute();
 const router = useRouter();
+
+const onImport = async (uploader: UploadRequestOptions): XMLHttpRequest | Promise<unknown> => {
+	const loading = ElLoading.service({
+		lock: true,
+		text: "Loading",
+		background: "rgba(0, 0, 0, 0.7)"
+	});
+	const { file } = uploader;
+	const fd = new FormData();
+	fd.append("file", file);
+	const res = await service.backend.project.params.post(fd);
+
+	if (res.length > 0) {
+		params.value.push(
+			...res.map((item) => ({
+				key: item.title,
+				value: item.value
+			}))
+		);
+	} else {
+		ElMessage.warning("没有添加数据");
+	}
+	loading.close();
+
+	return Promise.resolve();
+};
 
 const loadData = async () => {
 	const res = await service.backend.project.get(id.value)();

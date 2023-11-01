@@ -52,7 +52,6 @@ const onDraft = () => {
 };
 
 const onFormSubmit = () => {
-	console.log(form);
 	refForm.value?.validate(async (valid) => {
 		if (valid) {
 			loading.value = true;
@@ -64,6 +63,8 @@ const onFormSubmit = () => {
 					  })
 					: service.backend.news.post(form));
 				console.log(res);
+				ElMessage.success("操作成功");
+				goBack();
 			} catch (err) {
 				ElMessage.error(err.message);
 			}
@@ -85,13 +86,18 @@ const submitBtText = computed(() => (id.value > 0 ? "编辑" : "创建"));
 const typeOptions = ref([
 	{
 		value: 1,
-		label: "飞视新闻",
+		label: "飞视作品",
 		key: 1
 	},
 	{
 		value: 2,
 		label: "飞视荣誉",
 		key: 2
+	},
+	{
+		value: 3,
+		label: "飞视新闻",
+		key: 3
 	}
 ]);
 const refForm = ref<FormInstance>();
@@ -114,12 +120,6 @@ const formRules = reactive<FormRules>({
 		{
 			required: true,
 			message: "请填写中文名"
-		}
-	],
-	"title.en": [
-		{
-			required: true,
-			message: "请填写英文名"
 		}
 	],
 	link: [

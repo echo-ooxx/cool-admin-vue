@@ -178,4 +178,11 @@ export class BaseService {
 			method: "DELETE"
 		});
 	}
+
+	captcha() {
+		return this.request({
+			url: "/captcha",
+			method: "GET"
+		});
+	}
 }

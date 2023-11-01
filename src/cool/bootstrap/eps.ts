@@ -160,10 +160,10 @@ export async function createEps() {
 									d[k].permission = {};
 									const ks = Array.from(new Set([...names, ...getNames(d[k])]));
 									ks.forEach((e) => {
-										// d[k].permission[e] = `${d[k].namespace.replace(
-										// 	"admin/",
-										// 	""
-										// )}/${e}`.replace(/\//g, ":");
+										d[k].permission[e] = `${(d[k] && d[k].namespace
+											? d[k].namespace
+											: ""
+										).replace("admin/", "")}/${e}`.replace(/\//g, ":");
 									});
 								}
 								list.push(e);
@@ -221,32 +221,38 @@ export async function createEps() {
 	}
 
 	// 格式化swagger接口列表
+
 	function formatApis(data: SwaggerReturn): ApiItem[] {
 		const { paths } = data;
+		const whitelist = ["open", "backend"];
 		const reg = /\/{[^}]+}/g;
 		const group = Object.keys(paths);
 
-		const _format = group.map((item) => {
-			const _prefix = item.replaceAll(reg, "");
-			const prefix = _prefix;
-			const path = "";
-			// const lastIndex = _prefix.lastIndexOf("/");
-			// if (lastIndex > 0) {
-			// 	prefix = _prefix.substring(0, lastIndex);
-			// 	path = _prefix.substring(lastIndex);
-			// }
-			const api = Object.keys(paths[item]).map((method: string) => {
+		const _format = group
+			.filter((k) => whitelist.indexOf(k.substring(1).split("/")["0"]) >= 0)
+			.map((item) => {
+				const prefix = item.replace(reg, "");
+				const path = "";
+				const api = Object.keys(paths[item]).map((method: string) => {
+					const _v = paths[item][method];
+					return {
+						name: _v.operationId,
+						dts: {
+							parameters: _v.parameters
+						},
+						method,
+						path,
+						prefix: "",
+						summary: "",
+						tag: ""
+					};
+				});
 				return {
-					method,
-					path
+					name: "",
+					prefix,
+					api: api
 				};
 			});
-			return {
-				name: "",
-				prefix,
-				api: []
-			};
-		});
 
 		return _format;
 	}

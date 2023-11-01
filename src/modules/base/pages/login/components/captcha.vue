@@ -21,8 +21,8 @@ const base64 = ref("");
 const svg = ref("");
 
 async function refresh() {
-	const pre = service.backend.login.captcha.get();
-	pre()
+	service.backend.login
+		.captcha()
 		.then(({ captchaID, data }) => {
 			if (data.includes(";base64,")) {
 				base64.value = data;

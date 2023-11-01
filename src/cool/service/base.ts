@@ -179,9 +179,17 @@ export class BaseService {
 		});
 	}
 
+	// 解决同时有/a和/a/b接口形式冲突
 	captcha() {
 		return this.request({
 			url: "/captcha",
+			method: "GET"
+		});
+	}
+
+	token() {
+		return this.request({
+			url: "/token",
 			method: "GET"
 		});
 	}

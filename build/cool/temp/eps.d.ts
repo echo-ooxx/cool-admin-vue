@@ -45,6 +45,10 @@ declare namespace Eps {
 		 */
 		captcha(data?: any): Promise<any>;
 		/**
+		 * token
+		 */
+		token(data?: any): Promise<any>;
+		/**
 		 * 权限标识
 		 */
 		permission: {
@@ -58,6 +62,7 @@ declare namespace Eps {
 			patch: string;
 			delete: string;
 			captcha: string;
+			token: string;
 		};
 		/**
 		 * 权限状态
@@ -73,6 +78,7 @@ declare namespace Eps {
 			patch: boolean;
 			delete: boolean;
 			captcha: boolean;
+			token: boolean;
 		};
 		/**
 		 * 请求
@@ -126,6 +132,10 @@ declare namespace Eps {
 		 */
 		captcha(data?: any): Promise<any>;
 		/**
+		 * token
+		 */
+		token(data?: any): Promise<any>;
+		/**
 		 * 权限标识
 		 */
 		permission: {
@@ -139,6 +149,7 @@ declare namespace Eps {
 			patch: string;
 			delete: string;
 			captcha: string;
+			token: string;
 		};
 		/**
 		 * 权限状态
@@ -154,6 +165,7 @@ declare namespace Eps {
 			patch: boolean;
 			delete: boolean;
 			captcha: boolean;
+			token: boolean;
 		};
 		/**
 		 * 请求
@@ -207,6 +219,10 @@ declare namespace Eps {
 		 */
 		captcha(data?: any): Promise<any>;
 		/**
+		 * token
+		 */
+		token(data?: any): Promise<any>;
+		/**
 		 * 权限标识
 		 */
 		permission: {
@@ -220,6 +236,7 @@ declare namespace Eps {
 			patch: string;
 			delete: string;
 			captcha: string;
+			token: string;
 		};
 		/**
 		 * 权限状态
@@ -235,6 +252,7 @@ declare namespace Eps {
 			patch: boolean;
 			delete: boolean;
 			captcha: boolean;
+			token: boolean;
 		};
 		/**
 		 * 请求
@@ -385,6 +403,10 @@ declare namespace Eps {
 		 */
 		captcha(data?: any): Promise<any>;
 		/**
+		 * token
+		 */
+		token(data?: any): Promise<any>;
+		/**
 		 * refreshToken
 		 */
 		refreshToken(data?: any): Promise<any>;
@@ -403,6 +425,7 @@ declare namespace Eps {
 			patch: string;
 			delete: string;
 			captcha: string;
+			token: string;
 			refreshToken: string;
 		};
 		/**
@@ -420,6 +443,7 @@ declare namespace Eps {
 			patch: boolean;
 			delete: boolean;
 			captcha: boolean;
+			token: boolean;
 			refreshToken: boolean;
 		};
 		/**
@@ -478,6 +502,10 @@ declare namespace Eps {
 		 */
 		captcha(data?: any): Promise<any>;
 		/**
+		 * token
+		 */
+		token(data?: any): Promise<any>;
+		/**
 		 * 权限标识
 		 */
 		permission: {
@@ -492,6 +520,7 @@ declare namespace Eps {
 			patch: string;
 			delete: string;
 			captcha: string;
+			token: string;
 		};
 		/**
 		 * 权限状态
@@ -508,6 +537,7 @@ declare namespace Eps {
 			patch: boolean;
 			delete: boolean;
 			captcha: boolean;
+			token: boolean;
 		};
 		/**
 		 * 请求
@@ -569,6 +599,10 @@ declare namespace Eps {
 		 */
 		captcha(data?: any): Promise<any>;
 		/**
+		 * token
+		 */
+		token(data?: any): Promise<any>;
+		/**
 		 * 权限标识
 		 */
 		permission: {
@@ -584,6 +618,7 @@ declare namespace Eps {
 			patch: string;
 			delete: string;
 			captcha: string;
+			token: string;
 		};
 		/**
 		 * 权限状态
@@ -601,6 +636,7 @@ declare namespace Eps {
 			patch: boolean;
 			delete: boolean;
 			captcha: boolean;
+			token: boolean;
 		};
 		/**
 		 * 请求
@@ -662,6 +698,10 @@ declare namespace Eps {
 		 */
 		captcha(data?: any): Promise<any>;
 		/**
+		 * token
+		 */
+		token(data?: any): Promise<any>;
+		/**
 		 * flush
 		 */
 		flush(data?: any): Promise<any>;
@@ -685,6 +725,7 @@ declare namespace Eps {
 			patch: string;
 			delete: string;
 			captcha: string;
+			token: string;
 			flush: string;
 			params: string;
 		};
@@ -704,6 +745,7 @@ declare namespace Eps {
 			patch: boolean;
 			delete: boolean;
 			captcha: boolean;
+			token: boolean;
 			flush: boolean;
 			params: boolean;
 		};
@@ -771,6 +813,10 @@ declare namespace Eps {
 		 */
 		captcha(data?: any): Promise<any>;
 		/**
+		 * token
+		 */
+		token(data?: any): Promise<any>;
+		/**
 		 * 权限标识
 		 */
 		permission: {
@@ -787,6 +833,7 @@ declare namespace Eps {
 			patch: string;
 			delete: string;
 			captcha: string;
+			token: string;
 		};
 		/**
 		 * 权限状态
@@ -805,6 +852,7 @@ declare namespace Eps {
 			patch: boolean;
 			delete: boolean;
 			captcha: boolean;
+			token: boolean;
 		};
 		/**
 		 * 请求
@@ -862,6 +910,10 @@ declare namespace Eps {
 		 */
 		captcha(data?: any): Promise<any>;
 		/**
+		 * token
+		 */
+		token(data?: any): Promise<any>;
+		/**
 		 * 权限标识
 		 */
 		permission: {
@@ -876,6 +928,7 @@ declare namespace Eps {
 			patch: string;
 			delete: string;
 			captcha: string;
+			token: string;
 		};
 		/**
 		 * 权限状态
@@ -892,6 +945,7 @@ declare namespace Eps {
 			patch: boolean;
 			delete: boolean;
 			captcha: boolean;
+			token: boolean;
 		};
 		/**
 		 * 请求
@@ -949,6 +1003,10 @@ declare namespace Eps {
 		 */
 		captcha(data?: any): Promise<any>;
 		/**
+		 * token
+		 */
+		token(data?: any): Promise<any>;
+		/**
 		 * 权限标识
 		 */
 		permission: {
@@ -963,6 +1021,7 @@ declare namespace Eps {
 			patch: string;
 			delete: string;
 			captcha: string;
+			token: string;
 		};
 		/**
 		 * 权限状态
@@ -979,6 +1038,7 @@ declare namespace Eps {
 			patch: boolean;
 			delete: boolean;
 			captcha: boolean;
+			token: boolean;
 		};
 		/**
 		 * 请求
@@ -1036,6 +1096,10 @@ declare namespace Eps {
 		 */
 		captcha(data?: any): Promise<any>;
 		/**
+		 * token
+		 */
+		token(data?: any): Promise<any>;
+		/**
 		 * 权限标识
 		 */
 		permission: {
@@ -1050,6 +1114,7 @@ declare namespace Eps {
 			patch: string;
 			delete: string;
 			captcha: string;
+			token: string;
 		};
 		/**
 		 * 权限状态
@@ -1066,6 +1131,7 @@ declare namespace Eps {
 			patch: boolean;
 			delete: boolean;
 			captcha: boolean;
+			token: boolean;
 		};
 		/**
 		 * 请求
@@ -1123,6 +1189,10 @@ declare namespace Eps {
 		 */
 		captcha(data?: any): Promise<any>;
 		/**
+		 * token
+		 */
+		token(data?: any): Promise<any>;
+		/**
 		 * 权限标识
 		 */
 		permission: {
@@ -1137,6 +1207,7 @@ declare namespace Eps {
 			patch: string;
 			delete: string;
 			captcha: string;
+			token: string;
 		};
 		/**
 		 * 权限状态
@@ -1153,6 +1224,7 @@ declare namespace Eps {
 			patch: boolean;
 			delete: boolean;
 			captcha: boolean;
+			token: boolean;
 		};
 		/**
 		 * 请求
@@ -1214,6 +1286,10 @@ declare namespace Eps {
 		 */
 		captcha(data?: any): Promise<any>;
 		/**
+		 * token
+		 */
+		token(data?: any): Promise<any>;
+		/**
 		 * 权限标识
 		 */
 		permission: {
@@ -1229,6 +1305,7 @@ declare namespace Eps {
 			patch: string;
 			delete: string;
 			captcha: string;
+			token: string;
 		};
 		/**
 		 * 权限状态
@@ -1246,6 +1323,7 @@ declare namespace Eps {
 			patch: boolean;
 			delete: boolean;
 			captcha: boolean;
+			token: boolean;
 		};
 		/**
 		 * 请求
@@ -1307,6 +1385,10 @@ declare namespace Eps {
 		 */
 		captcha(data?: any): Promise<any>;
 		/**
+		 * token
+		 */
+		token(data?: any): Promise<any>;
+		/**
 		 * 权限标识
 		 */
 		permission: {
@@ -1322,6 +1404,7 @@ declare namespace Eps {
 			patch: string;
 			delete: string;
 			captcha: string;
+			token: string;
 		};
 		/**
 		 * 权限状态
@@ -1339,6 +1422,7 @@ declare namespace Eps {
 			patch: boolean;
 			delete: boolean;
 			captcha: boolean;
+			token: boolean;
 		};
 		/**
 		 * 请求

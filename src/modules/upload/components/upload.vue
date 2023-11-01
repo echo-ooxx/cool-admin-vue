@@ -157,12 +157,14 @@ import { isArray, isNumber } from "lodash-es";
 import Draggable from "vuedraggable";
 import { ElMessage } from "element-plus";
 import { PictureFilled, ZoomIn, Delete } from "@element-plus/icons-vue";
-import { useCool, module } from "/@/cool";
+import { useCool, module, config } from "/@/cool";
 import { extname, uuid, isPromise } from "/@/cool/utils";
 import { useBase } from "/$/base";
 import { fileSize, fileName, fileType, getUrls } from "../utils";
 import { Upload } from "../types";
 import ItemViewer from "./items/viewer.vue";
+
+const { baseUrl } = config;
 
 const props = defineProps({
 	modelValue: {
@@ -458,11 +460,11 @@ async function httpRequest(req: any, item?: any) {
 				});
 			} else if (mode == "" && type == "qiniu") {
 				next({
-					host: "/dev/open/upload"
+					host: `${baseUrl}/open/upload`
 				});
 			} else {
-				service.open.upload.token
-					.get()
+				service.open.upload
+					.token()
 					.then((res) => {
 						switch (type) {
 							// 腾讯
